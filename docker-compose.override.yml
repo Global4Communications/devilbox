@@ -25,6 +25,7 @@ x-app: &default-php
   volumes:
     - ${DEVILBOX_PATH}/cfg/php-startup-${PHP_SERVER}:/startup.1.d:rw${MOUNT_OPTIONS}
     - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
+    - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
   dns:
     - 172.16.238.100
   depends_on:
@@ -129,25 +130,25 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
 
-  # php74:
-  #   <<: *default-php
-  #   image: devilbox/php-fpm:7.4-work-0.150
-  #   hostname: php74
-  #   networks:
-  #     app_net:
-  #       ipv4_address: 172.16.238.208
-  #   volumes:
-  #     # Specific volumes
-  #     - ${DEVILBOX_PATH}/cfg/php-ini-7.4:/etc/php-custom.d:ro${MOUNT_OPTIONS}
-  #     - ${DEVILBOX_PATH}/cfg/php-fpm-7.4:/etc/php-fpm-custom.d:ro${MOUNT_OPTIONS}
-  #     - ${DEVILBOX_PATH}/cfg/php-startup-7.4:/startup.1.d:rw${MOUNT_OPTIONS}
-  #     - ${DEVILBOX_PATH}/log/php-fpm-7.4:/var/log/php:rw${MOUNT_OPTIONS}
-  #     # Generic volumes
-  #     - ${HOST_PATH_HTTPD_DATADIR}:/shared/httpd:rw${MOUNT_OPTIONS}
-  #     - ${DEVILBOX_PATH}/supervisor:/etc/supervisor/custom.d:rw${MOUNT_OPTIONS}
-  #     - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
-  #     - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
-  #     - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
+  php74:
+    <<: *default-php
+    image: devilbox/php-fpm:7.4-work-0.150
+    hostname: php74
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.208
+    volumes:
+      # Specific volumes
+      - ${DEVILBOX_PATH}/cfg/php-ini-7.4:/etc/php-custom.d:ro${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/cfg/php-fpm-7.4:/etc/php-fpm-custom.d:ro${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/cfg/php-startup-7.4:/startup.1.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/log/php-fpm-7.4:/var/log/php:rw${MOUNT_OPTIONS}
+      # Generic volumes
+      - ${HOST_PATH_HTTPD_DATADIR}:/shared/httpd:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/supervisor:/etc/supervisor/custom.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
+      - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
+      - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
 
   # php80:
   #   <<: *default-php
