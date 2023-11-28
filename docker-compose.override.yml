@@ -49,6 +49,13 @@ services:
   memcd:
     image: alpine
     entrypoint: []
+  # affinity_db:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   environment:
+  #     ACCEPT_EULA: "Y"
+  #     SA_PASSWORD: "yourStrong(!)Password" # username: sa
+  #   ports:
+  #     - "1433:1433"
 
   # php70:
   #   <<: *default-php
