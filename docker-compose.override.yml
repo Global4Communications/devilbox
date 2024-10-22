@@ -212,12 +212,14 @@ services:
       # Specific volumes
       - ${DEVILBOX_PATH}/cfg/php-ini-8.2:/etc/php-custom.d:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/cfg/php-fpm-8.2:/etc/php-fpm-custom.d:ro${MOUNT_OPTIONS}
-      # - ${DEVILBOX_PATH}/cfg/php-startup-8.2:/startup.1.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/cfg/php-startup-8.2:/startup.1.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/log/php-fpm-8.2:/var/log/php:rw${MOUNT_OPTIONS}
       # Generic volumes
       - ${HOST_PATH_HTTPD_DATADIR}:/shared/httpd:rw${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/supervisor:/etc/supervisor/custom.d:rw${MOUNT_OPTIONS}
-      # - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
+      - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
 
 
