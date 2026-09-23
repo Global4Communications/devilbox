@@ -41,6 +41,7 @@
 /log/php-fpm-8.0/*
 /log/php-fpm-8.1/*
 /log/php-fpm-8.2/*
+/log/php-fpm-8.3/*
 !/log/.keepme
 !/log/*/.keepme
 
