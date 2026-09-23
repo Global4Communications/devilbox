@@ -27,6 +27,7 @@ x-app: &default-php
     - ${DEVILBOX_PATH}/cfg/php-startup-${PHP_SERVER}:/startup.1.d:rw${MOUNT_OPTIONS}
     - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
     - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+    - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
   dns:
     - 172.16.238.100
   depends_on:
@@ -98,6 +99,7 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
 
   php72:
     <<: *default-php
@@ -119,6 +121,7 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
 
   php73:
     <<: *default-php
@@ -140,6 +143,7 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
 
   php74:
     <<: *default-php
@@ -161,6 +165,7 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
 
   # php80:
   #   <<: *default-php
@@ -222,6 +227,7 @@ services:
       - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/ca:/ca:rw${MOUNT_OPTIONS}
 
 
   # -----------------------------------------------------------------------------------------------
