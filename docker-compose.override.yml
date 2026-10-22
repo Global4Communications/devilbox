@@ -223,6 +223,34 @@ services:
       - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
       - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
 
+  # PHP 8.3 is not published by upstream devilbox (its php-fpm images stop at 8.2), so this service is built
+  # from docker/php83. It follows the same layout as php82 and only covers the CLI workflow.
+  php83:
+    <<: *default-php
+    build:
+      context: ./docker/php83
+      args:
+        NEW_UID: ${NEW_UID:-1000}
+        NEW_GID: ${NEW_GID:-1000}
+    image: global4communications/devilbox-php-fpm:8.3-lean
+    hostname: php83
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.212
+    volumes:
+      # Specific volumes
+      - ${DEVILBOX_PATH}/cfg/php-ini-8.3:/etc/php-custom.d:ro${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/cfg/php-fpm-8.3:/etc/php-fpm-custom.d:ro${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/cfg/php-startup-8.3:/startup.1.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/log/php-fpm-8.3:/var/log/php:rw${MOUNT_OPTIONS}
+      # Generic volumes
+      - ${HOST_PATH_HTTPD_DATADIR}:/shared/httpd:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/supervisor:/etc/supervisor/custom.d:rw${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/autostart:/startup.2.d:rw${MOUNT_OPTIONS}
+      - devilbox-mail:/var/mail:rw${MOUNT_OPTIONS}
+      - ${HOST_PATH_SSH_DIR}:/home/devilbox/.ssh:ro${MOUNT_OPTIONS}
+      - ${DEVILBOX_PATH}/bash:/etc/bashrc-devilbox.d:rw${MOUNT_OPTIONS}
+
 
   # -----------------------------------------------------------------------------------------------
   # Ngrok
