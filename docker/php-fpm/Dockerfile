@@ -1,4 +1,5 @@
-FROM php:8.3-fpm-bookworm
+ARG PHP_VERSION=8.3
+FROM php:${PHP_VERSION}-fpm
 
 COPY --from=mlocati/php-extension-installer:2 /usr/bin/install-php-extensions /usr/local/bin/
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
@@ -9,8 +10,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && install-php-extensions \
         amqp apcu bcmath bz2 calendar exif gd gmp igbinary imagick intl \
-        memcached mysqli opcache pcntl pdo_mysql redis soap sockets \
-        uuid xdebug xsl yaml zip
+        memcached mysqli opcache pcntl pdo_mysql pdo_pgsql pdo_sqlsrv pgsql redis \
+        soap sockets sqlsrv tidy uuid xdebug xsl yaml zip
 
 RUN groupadd -g 1000 devilbox \
     && useradd -m -u 1000 -g 1000 -s /bin/bash devilbox \
